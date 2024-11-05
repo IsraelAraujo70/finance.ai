@@ -1,8 +1,8 @@
 
 const Home = () => {
   return(
-    <h1>Oi</h1>
+    <h1 className="text-red-500">Oi</h1>
   )
-} 
+}  
 
 export default Home
