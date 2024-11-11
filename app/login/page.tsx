@@ -4,6 +4,7 @@ import { LogInIcon } from "lucide-react";
 import { SignInButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import Logo from "../_components/logo";
 
 const LoginPage = async () => {
   const { userId } = await auth();
@@ -13,10 +14,7 @@ const LoginPage = async () => {
   return (
     <div className="grid h-full grid-cols-2">
       <div className="flex h-full max-w-[550px] flex-col justify-center p-8">
-        <div className="mb-8 flex items-center">
-          <Image src="/logo.svg" alt="" width={39} height={39} />
-          <h1 className="ms-3 text-2xl font-bold">AgiFinance</h1>
-        </div>
+        <Logo />
         <h2 className="mb-3 text-4xl font-bold leading-[39px]">Bem-vindo</h2>
         <p className="mb-8 text-muted-foreground">
           A agiFinance é uma plataforma de gestão financeira que utiliza IA para

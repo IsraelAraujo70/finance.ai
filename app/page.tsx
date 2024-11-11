@@ -1,21 +1,14 @@
-import { UserButton } from "@clerk/nextjs"
-import { auth } from "@clerk/nextjs/server"
-import { dark } from "@clerk/themes"
-import { redirect } from "next/navigation"
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import Navbar from "./_components/navbar";
 
 const Home = async () => {
-  const {userId} = await auth()
-  if(!userId) {
-    redirect('/login')
+  const { userId } = await auth();
+  if (!userId) {
+    redirect("/login");
   }
 
-  return(
-    <div className="h-full flex items-center justify-center">
-      <UserButton showName appearance={{
-        baseTheme: dark
-      }}/>
-    </div>
-  )
-}  
+  return <Navbar></Navbar>;
+};
 
-export default Home
+export default Home;
