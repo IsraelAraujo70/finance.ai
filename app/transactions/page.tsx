@@ -7,6 +7,7 @@ import Navbar from "../_components/navbar";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { ScrollArea } from "../_components/ui/scroll-area";
+
 const TransactionsPage = async () => {
   const { userId } = await auth();
   if (!userId) {
@@ -26,8 +27,11 @@ const TransactionsPage = async () => {
           <h1 className="text-2xl font-bold">Transações</h1>
           <AddTransactionButton></AddTransactionButton>
         </div>
-        <ScrollArea>
-          <DataTable columns={transactionColumns} data={transactions} />
+        <ScrollArea className="h-[90%]">
+          <DataTable
+            columns={transactionColumns}
+            data={JSON.parse(JSON.stringify(transactions))}
+          />
         </ScrollArea>
       </div>
     </>
