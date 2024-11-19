@@ -17,8 +17,8 @@ export const createStripeCheckout = async () => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     mode: "subscription",
-    success_url: "http://localhost:3000",
-    cancel_url: "http://localhost:3000",
+    success_url: "https://agifinance.vercel.app",
+    cancel_url: "https://agifinance.vercel.app",
     subscription_data: {
       metadata: {
         clerk_user_id: userId,
