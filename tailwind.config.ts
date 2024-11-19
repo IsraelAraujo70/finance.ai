@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-import tailwindcssAnimate from "tailwindcss-animate"; // Importação usando ES Modules
 
 const config: Config = {
   darkMode: "class", // Modo escuro ativado via classe
@@ -60,7 +59,8 @@ const config: Config = {
       },
     },
   },
-  plugins: [tailwindcssAnimate], // Uso do plugin importado
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
 
 export default config;

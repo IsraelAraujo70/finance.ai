@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Navbar from "../_components/navbar";
 import SummaryCards from "./_components/summary-cards";
@@ -9,6 +9,8 @@ import { getDashBoard } from "../_data/get-dashboard";
 import ExpensesPerCategory from "./_components/expenses-per-category";
 import LastTransactions from "./_components/last-transactions";
 import { canUserAddTransaction } from "../_data/can-user-add-transaction";
+import AiReportButton from "./_components/ai-report-button";
+import { ScrollArea } from "../_components/ui/scroll-area";
 
 interface HomeProps {
   searchParams: {
@@ -27,28 +29,39 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
   }
   const dashboard = await getDashBoard(month);
   const userCanAddTransactions = await canUserAddTransaction();
+  const user = await clerkClient().users.getUser(userId);
   return (
     <>
       <Navbar></Navbar>
       <div className="flex flex-col space-y-6 overflow-hidden p-6">
         <div className="flex justify-between">
           <h1 className="text-2xl font-bold">DashBoard</h1>
-          <TimeSelect />
+          <div className="flex items-center gap-3">
+            <AiReportButton
+              month={month}
+              hasPremiumPlan={
+                user.publicMetadata.subscriptionPlan === "premium"
+              }
+            />
+            <TimeSelect />
+          </div>
         </div>
         <div className="grid grid-cols-[2fr,1fr] gap-6 overflow-hidden">
-          <div className="flex flex-col gap-6 overflow-hidden">
-            <SummaryCards
-              month={month}
-              {...dashboard}
-              UserCanAddTransaction={userCanAddTransactions}
-            />
-            <div className="grid grid-cols-3 grid-rows-1 gap-6">
-              <TransactionsPieChart {...dashboard} />
-              <ExpensesPerCategory
-                expensesPerCategory={dashboard.totalExpensePerCategory}
+          <ScrollArea>
+            <div className="flex flex-col gap-6 overflow-hidden">
+              <SummaryCards
+                month={month}
+                {...dashboard}
+                UserCanAddTransaction={userCanAddTransactions}
               />
+              <div className="grid grid-cols-3 grid-rows-1 gap-6">
+                <TransactionsPieChart {...dashboard} />
+                <ExpensesPerCategory
+                  expensesPerCategory={dashboard.totalExpensePerCategory}
+                />
+              </div>
             </div>
-          </div>
+          </ScrollArea>
           <LastTransactions lastTransactions={dashboard.lastTransactions} />
         </div>
       </div>
