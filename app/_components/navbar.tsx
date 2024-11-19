@@ -11,7 +11,7 @@ const Navbar = () => {
       <div className="flex items-center gap-10">
         <div className="flex items-center">
           <Image src="/logo.svg" alt="" width={28} height={28} />
-          <h1 className="ms-3 text-2xl font-bold">AgiFinance</h1>
+          <h1 className="ms-3 text-2xl font-bold">agiFinance</h1>
         </div>
         <Link
           href="/"
