@@ -33,6 +33,12 @@ export const generateAiReport = async ({ month }: generateAiReportSchema) => {
         lt: new Date(`2024-${month}-31`),
       },
     },
+    select: {
+      date: true,
+      type: true,
+      amount: true,
+      category: true,
+    },
   });
   const content = `Gere um relatório com insights sobre as minhas finanças, com dicas e orientações de como melhorar a minha vida financeira. As transações são divididas por ponto e vírgula. A estrutura de cada uma é {DATA}-{TIPO}-{VALOR}-{CATEGORIA}. São elas: ${transactions
     .map(
