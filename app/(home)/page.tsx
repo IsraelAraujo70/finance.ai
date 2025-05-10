@@ -15,19 +15,25 @@ import { ScrollArea } from "../_components/ui/scroll-area";
 interface HomeProps {
   searchParams: {
     month: string;
+    year?: string;
   };
 }
 
-const Home = async ({ searchParams: { month } }: HomeProps) => {
+const Home = async ({ searchParams: { month, year } }: HomeProps) => {
   const { userId } = await auth();
   if (!userId) {
     redirect("/login");
   }
+  const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, "0");
+  const currentYear = new Date().getFullYear().toString();
+
   const monthIsInvalid = !month || !isMatch(month, "MM");
-  if (monthIsInvalid) {
-    redirect(`?month=${new Date().getMonth() + 1}`);
+  const yearIsInvalid = year && !/^\d{4}$/.test(year);
+
+  if (monthIsInvalid || yearIsInvalid) {
+    redirect(`?month=${currentMonth}&year=${currentYear}`);
   }
-  const dashboard = await getDashBoard(month);
+  const dashboard = await getDashBoard(month, year);
   const userCanAddTransactions = await canUserAddTransaction();
   const user = await clerkClient().users.getUser(userId);
   return (
@@ -39,6 +45,7 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
           <div className="flex items-center gap-3">
             <AiReportButton
               month={month}
+              year={year || new Date().getFullYear().toString()}
               hasPremiumPlan={
                 user.publicMetadata.subscriptionPlan === "premium"
               }
@@ -51,6 +58,7 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
             <div className="flex flex-col gap-6 overflow-hidden">
               <SummaryCards
                 month={month}
+                year={year || new Date().getFullYear().toString()}
                 {...dashboard}
                 UserCanAddTransaction={userCanAddTransactions}
               />

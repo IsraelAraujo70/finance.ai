@@ -20,15 +20,20 @@ import Link from "next/link";
 interface AiReportButtonProps {
   hasPremiumPlan: boolean;
   month: string;
+  year: string;
 }
 
-const AiReportButton = ({ month, hasPremiumPlan }: AiReportButtonProps) => {
+const AiReportButton = ({
+  month,
+  year,
+  hasPremiumPlan,
+}: AiReportButtonProps) => {
   const [report, setReport] = useState<string | null>(null);
   const [reportIsLoading, setReportIsLoading] = useState(false);
   const handleGenerateReportClick = async () => {
     try {
       setReportIsLoading(true);
-      const aiReport = await generateAiReport({ month });
+      const aiReport = await generateAiReport({ month, year });
       setReport(aiReport);
     } catch (error) {
       console.error(error);
