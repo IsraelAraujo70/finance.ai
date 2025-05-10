@@ -83,6 +83,8 @@ const UpsertTransactionDialog = ({
   defaultValues,
   transactionId,
 }: UpsertTransactionDialogProps) => {
+  // Garantir que o transactionId está disponível para o componente
+  const currentTransactionId = transactionId;
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultValues ?? {
@@ -96,9 +98,13 @@ const UpsertTransactionDialog = ({
   });
   const onSubmit = async (data: FormSchema) => {
     try {
-      await upsertTransaction({ ...data, id: transactionId });
+      // Usar o ID da transação atual, garantindo que estamos editando a transação correta
+      await upsertTransaction({ ...data, id: currentTransactionId });
       setIsOpen(false);
       form.reset();
+
+      // Forçar um refresh da página para garantir que a tabela seja atualizada corretamente
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }

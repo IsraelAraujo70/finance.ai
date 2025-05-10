@@ -19,6 +19,15 @@ const AddTransactionButton = ({
   userCanAddTransaction,
 }: AddTransactionButtonProps) => {
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
+
+  // Função para fechar o diálogo e atualizar a página se necessário
+  const handleDialogClose = (shouldRefresh: boolean = false) => {
+    setDialogIsOpen(false);
+    if (shouldRefresh) {
+      // Forçar um refresh da página para garantir que a tabela seja atualizada corretamente
+      window.location.reload();
+    }
+  };
   return (
     <>
       <TooltipProvider>
@@ -41,7 +50,14 @@ const AddTransactionButton = ({
       </TooltipProvider>
       <UpsertTransactionDialog
         isOpen={dialogIsOpen}
-        setIsOpen={setDialogIsOpen}
+        setIsOpen={(isOpen) => {
+          if (!isOpen) {
+            // Quando o diálogo é fechado após adicionar uma transação, atualizar a página
+            handleDialogClose(true);
+          } else {
+            setDialogIsOpen(true);
+          }
+        }}
       />
     </>
   );
