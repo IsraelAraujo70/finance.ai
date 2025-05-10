@@ -84,20 +84,26 @@ const TransactionsPieChart = ({
         <div className="mt-2 space-y-2 sm:mt-4">
           <PercentageItem
             icon={
-              <TrendingUpIcon size={14} className="text-primary sm:size-16" />
+              <TrendingUpIcon
+                size={14}
+                className="text-primary sm:h-4 sm:w-4"
+              />
             }
             title="Receitas"
             value={typesPercentage[TransactionType.DEPOSIT]}
           />
           <PercentageItem
             icon={
-              <TrendingDownIcon size={14} className="text-danger sm:size-16" />
+              <TrendingDownIcon
+                size={14}
+                className="text-danger sm:h-4 sm:w-4"
+              />
             }
             title="Despesas"
             value={typesPercentage[TransactionType.EXPENSE]}
           />
           <PercentageItem
-            icon={<PiggyBankIcon size={14} className="sm:size-16" />}
+            icon={<PiggyBankIcon size={14} className="sm:h-4 sm:w-4" />}
             title="Investimentos"
             value={typesPercentage[TransactionType.INVESTMENT]}
           />
