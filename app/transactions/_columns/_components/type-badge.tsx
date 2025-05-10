@@ -9,24 +9,27 @@ interface TrasactionTypeBadgeProps {
 const TransactionTypeBadge = ({ transaction }: TrasactionTypeBadgeProps) => {
   if (transaction.type === TransactionType.DEPOSIT) {
     return (
-      <Badge className="bg-muted font-bold text-primary hover:bg-muted">
-        <CircleIcon className="mr-2 fill-primary" size={10} />
-        Depósito
+      <Badge className="bg-muted px-1.5 py-0.5 text-xs font-medium text-primary hover:bg-muted sm:px-2 sm:py-1 sm:text-sm sm:font-bold">
+        <CircleIcon className="mr-1 fill-primary sm:mr-2" size={8} />
+        <span className="hidden sm:inline">Depósito</span>
+        <span className="inline sm:hidden">Depósit</span>
       </Badge>
     );
   }
   if (transaction.type === TransactionType.EXPENSE) {
     return (
-      <Badge className="bg-danger bg-opacity-10 font-bold text-danger">
-        <CircleIcon className="mr-2 fill-danger" size={10} />
-        Despesa
+      <Badge className="bg-danger bg-opacity-10 px-1.5 py-0.5 text-xs font-medium text-danger sm:px-2 sm:py-1 sm:text-sm sm:font-bold">
+        <CircleIcon className="mr-1 fill-danger sm:mr-2" size={8} />
+        <span className="hidden sm:inline">Despesa</span>
+        <span className="inline sm:hidden">Desp</span>
       </Badge>
     );
   }
   return (
-    <Badge className="bg-white bg-opacity-10 font-bold text-white">
-      <CircleIcon className="mr-2 fill-white" size={10} />
-      Investimento
+    <Badge className="bg-white bg-opacity-10 px-1.5 py-0.5 text-xs font-medium text-white sm:px-2 sm:py-1 sm:text-sm sm:font-bold">
+      <CircleIcon className="mr-1 fill-white sm:mr-2" size={8} />
+      <span className="hidden sm:inline">Investimento</span>
+      <span className="inline sm:hidden">Invest</span>
     </Badge>
   );
 };

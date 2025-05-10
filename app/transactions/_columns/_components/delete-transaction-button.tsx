@@ -35,8 +35,12 @@ const DeleteTransactionButton = ({
     <>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="ghost" size="icon">
-            <TrashIcon />
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8 p-0 sm:h-9 sm:w-9"
+          >
+            <TrashIcon className="h-4 w-4" />
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
