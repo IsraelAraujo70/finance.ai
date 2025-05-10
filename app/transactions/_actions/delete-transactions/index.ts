@@ -5,7 +5,8 @@
  *
  * Revalida as rotas /transactions e / para refletir as alterações na UI.
  *
- * @param transactionId - O ID da transação a ser excluída.
+ * @param {Object} params - Objeto de parâmetros
+ * @param {string} params.transactionId - O ID da transação a ser excluída.
  */
 import { db } from "@/app/_lib/prisma";
 import { deleteTransactionInput } from "./schema";
