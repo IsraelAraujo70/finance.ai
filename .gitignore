@@ -37,3 +37,8 @@ next-env.d.ts
 
 #env files
 .env*
+
+#minified files
+all-code-concatenated.js
+all-code-concatenated.txt
+all-minified-code.js
