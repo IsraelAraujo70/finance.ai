@@ -39,10 +39,10 @@ const Home = async ({ searchParams: { month, year } }: HomeProps) => {
   return (
     <>
       <Navbar></Navbar>
-      <div className="flex flex-col space-y-6 overflow-hidden p-6">
-        <div className="flex justify-between">
-          <h1 className="text-2xl font-bold">DashBoard</h1>
-          <div className="flex items-center gap-3">
+      <div className="flex flex-col space-y-4 overflow-hidden p-4 sm:space-y-6 sm:p-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:gap-0">
+          <h1 className="text-xl font-bold sm:text-2xl">DashBoard</h1>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <AiReportButton
               month={month}
               year={year || new Date().getFullYear().toString()}
@@ -53,16 +53,16 @@ const Home = async ({ searchParams: { month, year } }: HomeProps) => {
             <TimeSelect />
           </div>
         </div>
-        <div className="grid grid-cols-[2fr,1fr] gap-6 overflow-hidden">
-          <ScrollArea>
-            <div className="flex flex-col gap-6 overflow-hidden">
+        <div className="grid grid-cols-1 gap-4 overflow-hidden sm:gap-6 lg:grid-cols-[2fr,1fr]">
+          <ScrollArea className="h-auto sm:h-full">
+            <div className="flex flex-col gap-4 overflow-hidden sm:gap-6">
               <SummaryCards
                 month={month}
                 year={year || new Date().getFullYear().toString()}
                 {...dashboard}
                 UserCanAddTransaction={userCanAddTransactions}
               />
-              <div className="grid grid-cols-3 grid-rows-1 gap-6">
+              <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <TransactionsPieChart {...dashboard} />
                 <ExpensesPerCategory
                   expensesPerCategory={dashboard.totalExpensePerCategory}
@@ -70,7 +70,9 @@ const Home = async ({ searchParams: { month, year } }: HomeProps) => {
               </div>
             </div>
           </ScrollArea>
-          <LastTransactions lastTransactions={dashboard.lastTransactions} />
+          <div className="mt-4 lg:mt-0">
+            <LastTransactions lastTransactions={dashboard.lastTransactions} />
+          </div>
         </div>
       </div>
     </>

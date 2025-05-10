@@ -55,13 +55,13 @@ const TimeSelect = () => {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1 sm:gap-2">
       <Select
         onValueChange={(value) => handleMonthChange(value)}
         value={month}
         defaultValue={currentMonth}
       >
-        <SelectTrigger className="w-[120px]">
+        <SelectTrigger className="w-[90px] text-xs sm:w-[120px] sm:text-sm">
           <SelectValue placeholder="Mês" />
         </SelectTrigger>
         <SelectContent>
@@ -78,7 +78,7 @@ const TimeSelect = () => {
         value={year}
         defaultValue={currentYear}
       >
-        <SelectTrigger className="w-[100px]">
+        <SelectTrigger className="w-[80px] text-xs sm:w-[100px] sm:text-sm">
           <SelectValue placeholder="Ano" />
         </SelectTrigger>
         <SelectContent>
