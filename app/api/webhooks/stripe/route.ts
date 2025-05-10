@@ -1,7 +1,18 @@
 import { clerkClient } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-
+/**
+ * Manipulador de webhook do Stripe.
+ *
+ * Lida com eventos do Stripe:
+ * - invoice.paid: Marca o usuário como premium e armazena os IDs de assinatura/cliente Stripe no Clerk.
+ * - customer.subscription.deleted: Remove o plano premium e limpa os IDs de assinatura/cliente Stripe no Clerk.
+ *
+ * Espera que o Stripe assine as requisições usando STRIPE_WEBHOOK_SECRET.
+ *
+ * @rota POST /api/webhooks/stripe
+ * @retorna {object} JSON { received: true } em caso de sucesso, erro 400 em caso de falha.
+ */
 export const POST = async (request: Request) => {
   if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_WEBHOOK_SECRET) {
     return NextResponse.error();
@@ -66,6 +77,6 @@ export const POST = async (request: Request) => {
     }
   }
   return NextResponse.json({
-    recived: true,
+    received: true,
   });
 };

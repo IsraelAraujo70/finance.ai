@@ -1,3 +1,18 @@
+/**
+ * Gera um relatório financeiro pessoal com IA para o usuário autenticado, considerando o mês e ano especificados.
+ *
+ * - Valida o esquema de entrada para mês e ano.
+ * - Autentica o usuário e verifica se possui assinatura premium.
+ * - Se estiver em ambiente de desenvolvimento (sem chave OpenAI), retorna um relatório de exemplo.
+ * - Busca as transações do usuário para o mês e ano fornecidos.
+ * - Envia os dados das transações para a OpenAI para gerar um relatório personalizado com insights e sugestões financeiras.
+ *
+ * @param {Object} params - Objeto de parâmetros
+ * @param {string} params.month - Mês no formato "MM"
+ * @param {string} [params.year] - Ano no formato "YYYY" (padrão: ano atual)
+ * @returns {Promise<string>} - Relatório em Markdown gerado pela OpenAI (ou relatório de exemplo em dev)
+ * @throws {Error} - Se o usuário não estiver autenticado ou não possuir plano premium
+ */
 "use server";
 
 import { db } from "@/app/_lib/prisma";
@@ -43,12 +58,14 @@ export const generateAiReport = async ({
       category: true,
     },
   });
+
   const content = `Gere um relatório com insights sobre as minhas finanças, com dicas e orientações de como melhorar a minha vida financeira. As transações são divididas por ponto e vírgula. A estrutura de cada uma é {DATA}-{TIPO}-{VALOR}-{CATEGORIA}. São elas: ${transactions
     .map(
       (transaction) =>
         `${transaction.date.toLocaleDateString("pt-BR")}-${transaction.type}-R$${transaction.amount}-${transaction.category}`,
     )
     .join(";")}`;
+
   const completion = await openAi.chat.completions.create({
     model: "gpt-4o",
     messages: [

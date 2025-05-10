@@ -1,5 +1,15 @@
 "use server";
 
+/**
+ * Cria uma sessão de checkout do Stripe para assinatura premium.
+ *
+ * - Verifica autenticação do usuário.
+ * - Cria uma nova sessão de checkout do Stripe no modo assinatura.
+ * - Adiciona o ID do usuário Clerk como metadata na assinatura.
+ *
+ * @retorna {Promise<{ sessionId: string }>} O ID da sessão de checkout do Stripe.
+ * @lança {Error} Se o usuário não estiver autenticado ou variáveis de ambiente estiverem ausentes.
+ */
 import { auth } from "@clerk/nextjs/server";
 import Stripe from "stripe";
 
