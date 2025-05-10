@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { UserButton } from "@clerk/nextjs";
+import { ThemeSwitcher } from "../../_components/theme-switcher";
 
 const DesktopNavbar = ({ pathname }: { pathname: string }) => {
   return (
@@ -42,7 +43,10 @@ const DesktopNavbar = ({ pathname }: { pathname: string }) => {
           Assinaturas
         </Link>
       </div>
-      <UserButton showName></UserButton>
+      <div className="flex items-center gap-3">
+        <ThemeSwitcher />
+        <UserButton showName />
+      </div>
     </nav>
   );
 };

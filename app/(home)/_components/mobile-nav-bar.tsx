@@ -4,6 +4,7 @@ import Image from "next/image";
 import { UserButton } from "@clerk/nextjs";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/app/_components/sheet";
+import { ThemeSwitcher } from "../../_components/theme-switcher";
 
 const MobileNavbar = ({ pathname }: { pathname: string }) => {
   return (
@@ -44,7 +45,10 @@ const MobileNavbar = ({ pathname }: { pathname: string }) => {
             </Link>
           </div>
           <div className="mt-4 border-t pt-4">
-            <UserButton showName />
+            <div className="flex items-center justify-between">
+              <UserButton showName />
+              <ThemeSwitcher />
+            </div>
           </div>
         </SheetContent>
       </Sheet>
