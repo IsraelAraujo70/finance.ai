@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { Toaster } from "./_components/ui/sonner";
 import { ThemeProvider } from "next-themes";
+import { PremiumChat } from "./_components/premium-chat";
 const mulish = Mulish({
   subsets: ["latin-ext"],
 });
@@ -30,6 +31,7 @@ export default function RootLayout({
           >
             <div className="flex h-full flex-col overflow-hidden">
               {children}
+              <PremiumChat />
             </div>
           </ClerkProvider>
           <Toaster />
