@@ -18,7 +18,7 @@ export function ChatAssistant({
   // Define a URL base do iframe com base no ambiente
   const iframeUrl = isDev
     ? "http://localhost:8000/client/iframe.html"
-    : "https://seu-dominio.com/assistente/client/iframe.html";
+    : "https://agifinance-assistant.onrender.com/client/iframe.html";
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
