@@ -23,9 +23,9 @@ export function ChatAssistant({
   const toggleChat = () => {
     setIsOpen(!isOpen);
   };
-
+  console.log("Usuário não é premium", isPremium);
   // Se o usuário não for premium, não renderiza o componente
-  if (!isPremium) return null;
+  // if (!isPremium) return null;
 
   return (
     <div className="fixed bottom-4 left-4 z-50">
